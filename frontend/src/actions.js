@@ -1,48 +1,23 @@
-import request from 'request';
+import axios from 'axios';
 
-export const loadTodos = () => dispatch => {
-    request({
-        url: 'http://localhost:8080/todoitems',
-        method: 'GET',
-        json: true
-    }, (err, response, body) => {
-        if (!err) {
-            dispatch({type: 'LOAD_TODOS', todos: body})
-        } else {
-            dispatch({type: 'SERVER_ERROR'});
-        }
-    })
+const baseUrl = 'http://localhost:8080/todoitems';
+
+export const loadTodos = () => (dispatch) => {
+    axios.get(baseUrl)
+        .then(
+            (response) => dispatch({type: 'LOAD_TODOS', todos: response.data}),
+            () => dispatch({type: 'SERVER_ERROR'})
+        );
 };
 
-export const createTodo = (description, important) => dispatch => {
-    request({
-            url: 'http://localhost:8080/todoitems',
-            method: 'POST',
-            json: true,
-            body: {description: description, important: important}
-        },
-        (err) => {
-            if (!err) {
-                dispatch(loadTodos())
-            } else {
-                dispatch({type: 'SERVER_ERROR'});
-            }
-        }
-    )
+export const createTodo = (description, important) => (dispatch) => {
+    axios.post(baseUrl, {
+        description: description, important: important
+    })
+        .then(() => dispatch(loadTodos()), () => dispatch({type: 'SERVER_ERROR'}));
 };
 
 export const deleteTodo = (id) => dispatch => {
-    request({
-            url: `http://localhost:8080/todoitems/${id}`,
-            method: 'DELETE',
-            json: true
-        },
-        (err) => {
-            if (!err) {
-                dispatch(loadTodos())
-            } else {
-                dispatch({type: 'SERVER_ERROR'});
-            }
-        }
-    )
+    axios.delete(`${baseUrl}/${id}`)
+        .then(() => dispatch(loadTodos()), () => dispatch({type: 'SERVER_ERROR'}));
 };
