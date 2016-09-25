@@ -7,9 +7,11 @@ import { todos, ui } from './reducers';
 import { loadTodos, createTodo, deleteTodo } from './actions';
 import App from './App';
 import './style.css';
+import createLogger from 'redux-logger';
 
 
-const store = createStore(combineReducers({todos, ui}), applyMiddleware(thunk));
+const logger = createLogger();
+const store = createStore(combineReducers({todos, ui}), applyMiddleware(thunk, logger));
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => {
     return {
