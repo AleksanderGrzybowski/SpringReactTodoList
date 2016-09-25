@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
 @RestController
 public class TodoController {
     
@@ -24,12 +26,12 @@ public class TodoController {
         this.service = service;
     }
     
-    @RequestMapping(value = ROOT, method = RequestMethod.GET)
+    @RequestMapping(value = ROOT, method = GET)
     public Collection<Todo> list() {
         return service.findAll();
     }
     
-    @RequestMapping(value = ROOT + "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = ROOT + "/{id}", method = GET)
     public ResponseEntity<Todo> list(@PathVariable int id) {
         Optional<Todo> todo = service.findById(id);
         
@@ -62,10 +64,17 @@ public class TodoController {
         }
     }
     
-    @RequestMapping(value = ROOT + "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = ROOT + "/{id}", method = DELETE)
     public ResponseEntity<Todo> delete(@PathVariable int id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+        @RequestMapping(
+            value = "/**",
+            method = RequestMethod.OPTIONS
+    )
+    public ResponseEntity handle() {
+        return new ResponseEntity(HttpStatus.OK);
     }
     
     @SuppressWarnings("WeakerAccess")
