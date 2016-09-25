@@ -4,15 +4,17 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { connect, Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { todos, ui } from './reducers';
-import { loadTodos, createTodo } from './actions';
+import { loadTodos, createTodo, deleteTodo } from './actions';
 import App from './App';
+import './style.css';
 
 
 const store = createStore(combineReducers({todos, ui}), applyMiddleware(thunk));
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => {
     return {
-        onCreate: () => dispatch(createTodo('testdesc', true))
+        onCreate: (description, important) => dispatch(createTodo(description, important)),
+        onDelete: (id) => dispatch(deleteTodo(id)),
     }
 };
 
