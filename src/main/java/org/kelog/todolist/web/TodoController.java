@@ -13,7 +13,8 @@ import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Optional;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class TodoController {
@@ -69,10 +70,9 @@ public class TodoController {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-        @RequestMapping(
-            value = "/**",
-            method = RequestMethod.OPTIONS
-    )
+    
+    // handle CORS
+    @RequestMapping(value = ROOT + "/**", method = RequestMethod.OPTIONS)
     public ResponseEntity handle() {
         return new ResponseEntity(HttpStatus.OK);
     }
