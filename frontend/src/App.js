@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class NewTodoForm extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             textInput: 'elo',
             checkbox: false
@@ -13,7 +13,7 @@ class NewTodoForm extends Component {
     onTextInputChange = (event) => {
         this.setState({textInput: event.target.value});
     };
-    
+
     onCheckboxChange = (event) => {
         this.setState({checkbox: event.target.checked});
     };
@@ -33,7 +33,7 @@ class NewTodoForm extends Component {
 
 const TodoItem = ({description, important, onDelete}) => {
     const className = important ? 'todo-important' : '';
-    
+
     return (
         <div className={className}>
             {description} {important}
@@ -44,7 +44,7 @@ const TodoItem = ({description, important, onDelete}) => {
 
 export default class App extends Component {
     render() {
-        const items = this.props.todos.map( item => 
+        const items = this.props.todos.map(item =>
             <TodoItem
                 description={item.description}
                 important={item.important}
@@ -52,13 +52,21 @@ export default class App extends Component {
                 key={item.id}
             />
         );
-        
+
+        if (this.props.ui.serverError) {
+            return (
+                <p className="error">
+                    Communication error occured, please refresh the page.
+                </p>
+            )
+        }
+
+        const requestInProgressClass = (this.props.ui.requestInProgress ? 'in-progress' : '');
+
         return (
-            <div>
+            <div className={requestInProgressClass}>
                 {items}
-                <NewTodoForm
-                    onCreate={this.props.onCreate}
-                />
+                <NewTodoForm onCreate={this.props.onCreate}/>
             </div>
         );
     }
