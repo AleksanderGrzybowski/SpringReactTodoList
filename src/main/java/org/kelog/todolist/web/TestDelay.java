@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class TestDelay {
     
     // edit for network lag simulation
-    private static final int DELAY_MS = 0;
+    private static final int DELAY_MS = 200;
     
     @Before("execution(* org.kelog..*Controller.*(..))")
     public void delay() {
