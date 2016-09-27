@@ -4,7 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { connect, Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { todos, ui } from './logic/reducers';
-import { loadTodos, createTodo, deleteTodo } from './logic/actions';
+import { loadTodos, createTodo, updateTodoImportant, deleteTodo } from './logic/actions';
 import App from './components/App';
 import createLogger from 'redux-logger';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -18,7 +18,8 @@ const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => {
     return {
         onCreate: (description, important) => dispatch(createTodo(description, important)),
-        onDelete: (id) => dispatch(deleteTodo(id))
+        onDelete: (id) => dispatch(deleteTodo(id)),
+        onUpdateImportant: (id, important) => dispatch(updateTodoImportant(id, important))
     }
 };
 

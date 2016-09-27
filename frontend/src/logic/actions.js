@@ -33,6 +33,20 @@ export const createTodo = (description, important) => (dispatch) => {
         );
 };
 
+export const updateTodoImportant = (id, important) => (dispatch) => {
+    dispatch(requestStart());
+
+    axios.patch(`${baseUrl}/${id}`, {
+        important: important
+    })
+        .then(() => {
+                dispatch(requestFinish());
+                dispatch(loadTodos());
+            },
+            () => dispatch(serverError())
+        );
+};
+
 export const deleteTodo = (id) => dispatch => {
     dispatch(requestStart());
     

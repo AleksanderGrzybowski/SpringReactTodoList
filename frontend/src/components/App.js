@@ -15,6 +15,7 @@ export default class App extends Component {
                 description={item.description}
                 important={item.important}
                 onDelete={this.props.onDelete.bind(this, item.id)}
+                onUpdateImportant={this.props.onUpdateImportant.bind(this, item.id, !item.important)}
                 key={item.id}
             />
         );
