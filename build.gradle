@@ -23,7 +23,11 @@ node {
     nodeModulesDir = file("${project.projectDir}/${frontendRoot}/")
 }
 
-task buildFrontend(type: NpmTask) {
+task cleanPublic(type: Delete) {
+    delete './public'
+}
+
+task buildFrontend(type: NpmTask, dependsOn: cleanPublic) {
     workingDir frontendRoot
     args = ['run', 'build']
     
@@ -31,12 +35,10 @@ task buildFrontend(type: NpmTask) {
     outputs.files file("${frontendRoot}/build")
 }
 
-task copyFrontendToPublic(type: Copy) {
+task copyFrontendToPublic(type: Copy, dependsOn: buildFrontend) {
     from "${frontendRoot}/build"
     into "public" 
 }
-
-copyFrontendToPublic.dependsOn buildFrontend
 
 group 'org.kelog'
 version '1.0-SNAPSHOT'
@@ -58,4 +60,5 @@ dependencies {
     runtime('com.h2database:h2')
 }
 
-bootRun.dependsOn buildFrontend, copyFrontendToPublic
+bootRun.dependsOn copyFrontendToPublic
+clean.dependsOn cleanPublic
