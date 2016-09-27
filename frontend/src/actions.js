@@ -34,6 +34,8 @@ export const createTodo = (description, important) => (dispatch) => {
 };
 
 export const deleteTodo = (id) => dispatch => {
+    dispatch(requestStart());
+    
     axios.delete(`${baseUrl}/${id}`)
         .then(() => {
                 dispatch(requestFinish());
