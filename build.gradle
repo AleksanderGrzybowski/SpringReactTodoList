@@ -61,4 +61,11 @@ dependencies {
 }
 
 bootRun.dependsOn copyFrontendToPublic
+jar.dependsOn copyFrontendToPublic
+
 clean.dependsOn cleanPublic
+
+
+jar.into('public') {
+    from('public')
+}
