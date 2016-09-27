@@ -7,8 +7,10 @@ import { todos, ui } from './reducers';
 import { loadTodos, createTodo, deleteTodo } from './actions';
 import App from './App';
 import createLogger from 'redux-logger';
-import './style.css';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+//noinspection ES6UnusedImports
+import * as _ from 'font-awesome-webpack';
 
 const logger = createLogger();
 const store = createStore(combineReducers({todos, ui}), applyMiddleware(thunk, logger));
