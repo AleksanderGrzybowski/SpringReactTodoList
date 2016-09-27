@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TodoItem from './TodoItem';
 import NewTodoForm from './NewTodoForm';
-import { Grid, Row, Col, ListGroup} from 'react-bootstrap';
+import { Grid, Row, Col, ListGroup } from 'react-bootstrap';
 import ErrorPage from './ErrorPage';
 
 export default class App extends Component {
@@ -31,6 +31,8 @@ export default class App extends Component {
 
         const todosCount = this.props.todos.length;
 
+        const bottomGridStyle = this.props.ui.requestInProgress ? {opacity: 0.5} : null;
+
         return (
             <Grid>
                 <Row>
@@ -42,7 +44,7 @@ export default class App extends Component {
                 </Row>
                 <Row>
                     <Col md={6} sm={12} mdOffset={3}>
-                        <ListGroup>
+                        <ListGroup style={bottomGridStyle}>
                             {items}
                             <NewTodoForm onCreate={this.props.onCreate}/>
                         </ListGroup>

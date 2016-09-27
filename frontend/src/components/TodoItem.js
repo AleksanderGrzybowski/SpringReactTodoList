@@ -15,7 +15,8 @@ const TodoItem = ({description, important, onDelete, onUpdateImportant}) => {
     const iconStyle = {
         marginLeft: '10px',
         fontSize: 16,
-        color: important ? 'black' : 'lightgray'
+        color: important ? 'black' : 'lightgray',
+        cursor: 'pointer'
     };
     
     return (
