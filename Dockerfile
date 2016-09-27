@@ -1,4 +1,6 @@
 FROM java:8
-COPY . /tmp/app
+
+COPY ./build/libs/SpringReactTodoList-1.0-SNAPSHOT.jar /app.jar
 EXPOSE 8080
-CMD ["/tmp/app/gradlew", "-p", "/tmp/app", "bootRun"]
+
+CMD ["java", "-jar", "/app.jar"]
