@@ -5,21 +5,25 @@ export default class NewTodoForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {textInput: ''}
+        this.state = {textInput: ''};
     }
 
     onTextInputChange = (event) => {
         this.setState({textInput: event.target.value});
-        console.log(this.state)
     };
-    
+
     onKeyPress = (event) => {
         if (event.key === 'Enter') {
             this.submitForm();
         }
     };
 
+    isTextInputValid = () => this.state.textInput.length !== 0;
+
     submitForm = () => {
+        if (!this.isTextInputValid()) {
+            return;
+        }
         this.setState({textInput: ''});
         this.props.onCreate(this.state.textInput, false);
     };
@@ -37,7 +41,13 @@ export default class NewTodoForm extends Component {
                             onKeyPress={this.onKeyPress}
                         />
                         <InputGroup.Button>
-                            <Button bsStyle="primary" onClick={this.submitForm}>Add</Button>
+                            <Button
+                                bsStyle="primary"
+                                disabled={!this.isTextInputValid()}
+                                onClick={this.submitForm}
+                            >
+                                Add
+                            </Button>
                         </InputGroup.Button>
                     </InputGroup>
                 </FormGroup>
