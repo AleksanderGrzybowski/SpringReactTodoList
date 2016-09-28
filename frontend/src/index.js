@@ -7,8 +7,7 @@ import { todos, ui } from './logic/reducers';
 import { loadTodos, createTodo, updateTodoImportant, deleteTodo } from './logic/actions';
 import App from './components/App';
 import createLogger from 'redux-logger';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootswatch/united/bootstrap.css';
 //noinspection ES6UnusedImports
 import * as _ from 'font-awesome-webpack';
 
