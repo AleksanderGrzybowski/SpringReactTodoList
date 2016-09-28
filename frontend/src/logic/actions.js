@@ -6,7 +6,8 @@ const requestStart = () => ({type: 'REQUEST_START'});
 const requestFinish = () => ({type: 'REQUEST_FINISH'});
 const serverError = () => ({type: 'SERVER_ERROR'});
 
-export const loadTodos = () => (dispatch) => {
+export const loadTodos = () => (dispatch, getState) => {
+    if (getState().ui.requestInProgress) return;
     dispatch(requestStart());
 
     axios.get(baseUrl)
@@ -19,7 +20,8 @@ export const loadTodos = () => (dispatch) => {
         );
 };
 
-export const createTodo = (description, important) => (dispatch) => {
+export const createTodo = (description, important) => (dispatch, getState) => {
+    if (getState().ui.requestInProgress) return;
     dispatch(requestStart());
 
     axios.post(baseUrl, {
@@ -33,7 +35,8 @@ export const createTodo = (description, important) => (dispatch) => {
         );
 };
 
-export const updateTodoImportant = (id, important) => (dispatch) => {
+export const updateTodoImportant = (id, important) => (dispatch, getState) => {
+    if (getState().ui.requestInProgress) return;
     dispatch(requestStart());
 
     axios.patch(`${baseUrl}/${id}`, {
@@ -47,7 +50,8 @@ export const updateTodoImportant = (id, important) => (dispatch) => {
         );
 };
 
-export const deleteTodo = (id) => dispatch => {
+export const deleteTodo = (id) => (dispatch, getState) => {
+    if (getState().ui.requestInProgress) return;
     dispatch(requestStart());
     
     axios.delete(`${baseUrl}/${id}`)
