@@ -27,7 +27,7 @@ task cleanPublic(type: Delete) {
     delete './public'
 }
 
-task buildFrontend(type: NpmTask, dependsOn: cleanPublic) {
+task buildFrontend(type: NpmTask, dependsOn: [cleanPublic, npmInstall]) {
     workingDir frontendRoot
     args = ['run', 'build']
     
