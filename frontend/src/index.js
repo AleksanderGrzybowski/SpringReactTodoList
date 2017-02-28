@@ -7,20 +7,18 @@ import { todos, ui } from './logic/reducers';
 import { loadTodos, createTodo, updateTodoImportant, deleteTodo } from './logic/actions';
 import App from './components/App';
 import createLogger from 'redux-logger';
-import 'bootswatch/united/bootstrap.css';
-//noinspection ES6UnusedImports
-import * as _ from 'font-awesome-webpack';
+import './css/bootswatch-united.css';
+import 'font-awesome-webpack';
 
 const logger = createLogger();
 const store = createStore(combineReducers({todos, ui}), applyMiddleware(thunk, logger));
 const mapStateToProps = (state) => state;
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onCreate: (description, important) => dispatch(createTodo(description, important)),
-        onDelete: (id) => dispatch(deleteTodo(id)),
-        onUpdateImportant: (id, important) => dispatch(updateTodoImportant(id, important))
-    }
-};
+const mapDispatchToProps = (dispatch) => ({
+    onCreate: (description, important) => dispatch(createTodo(description, important)),
+    onDelete: (id) => dispatch(deleteTodo(id)),
+    onUpdateImportant: (id, important) => dispatch(updateTodoImportant(id, important))
+
+});
 
 
 const LiveApp = connect(mapStateToProps, mapDispatchToProps)(App);
