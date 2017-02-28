@@ -30,4 +30,7 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+const loadingSpinner = document.getElementsByClassName('loading')[0];
+loadingSpinner.remove();
+
 setTimeout(() => store.dispatch(loadTodos()), 100);
