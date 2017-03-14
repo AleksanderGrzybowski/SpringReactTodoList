@@ -17,9 +17,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
+@RequestMapping("/todoitems")
 public class TodoController {
     
-    private final String ROOT = "/todoitems";
     private TodoService service;
     
     @Autowired
@@ -27,12 +27,12 @@ public class TodoController {
         this.service = service;
     }
     
-    @RequestMapping(value = ROOT, method = GET)
+    @RequestMapping(value = "", method = GET)
     public Collection<Todo> list() {
         return service.findAll();
     }
     
-    @RequestMapping(value = ROOT + "/{id}", method = GET)
+    @RequestMapping(value = "/{id}", method = GET)
     public ResponseEntity<Todo> list(@PathVariable int id) {
         Optional<Todo> todo = service.findById(id);
         
@@ -43,7 +43,7 @@ public class TodoController {
         }
     }
     
-    @RequestMapping(value = ROOT, method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<Todo> create(@RequestBody @Valid TodoItemCreateDto dto, BindingResult result) {
         if (!result.hasErrors()) {
             return new ResponseEntity<>(
@@ -55,26 +55,15 @@ public class TodoController {
         }
     }
     
-    @RequestMapping(value = ROOT + "/{id}", method = RequestMethod.PATCH)
-    public ResponseEntity<Todo> update(@PathVariable int id, @RequestBody @Valid TodoItemUpdateDto dto,
-                                       BindingResult result) {
-        if (!result.hasErrors()) {
-            return new ResponseEntity<>(service.update(id, dto.description, dto.important), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<Todo> update(@PathVariable int id, @RequestBody @Valid TodoItemUpdateDto dto) {
+        return new ResponseEntity<>(service.update(id, dto.description, dto.important), HttpStatus.OK);
     }
     
-    @RequestMapping(value = ROOT + "/{id}", method = DELETE)
+    @RequestMapping(value = "/{id}", method = DELETE)
     public ResponseEntity<Todo> delete(@PathVariable int id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-    
-    // handle CORS
-    @RequestMapping(value = ROOT + "/**", method = RequestMethod.OPTIONS)
-    public ResponseEntity handle() {
-        return new ResponseEntity(HttpStatus.OK);
     }
     
     @SuppressWarnings("WeakerAccess")
