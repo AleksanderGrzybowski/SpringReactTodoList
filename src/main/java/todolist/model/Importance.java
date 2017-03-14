@@ -1,4 +1,4 @@
-package org.kelog.todolist.model;
+package todolist.model;
 
 @SuppressWarnings("unused")
 public enum Importance {

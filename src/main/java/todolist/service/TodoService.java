@@ -1,7 +1,7 @@
-package org.kelog.todolist.service;
+package todolist.service;
 
-import org.kelog.todolist.dao.TodoRepository;
-import org.kelog.todolist.model.Todo;
+import todolist.dao.TodoRepository;
+import todolist.model.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

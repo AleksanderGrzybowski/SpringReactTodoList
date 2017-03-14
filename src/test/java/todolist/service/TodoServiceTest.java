@@ -1,9 +1,9 @@
-package org.kelog.todolist.service;
+package todolist.service;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.kelog.todolist.dao.TodoRepository;
-import org.kelog.todolist.model.Todo;
+import todolist.dao.TodoRepository;
+import todolist.model.Todo;
 
 import java.util.Collection;
 import java.util.Collections;

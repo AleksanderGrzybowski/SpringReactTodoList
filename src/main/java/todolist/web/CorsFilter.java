@@ -1,4 +1,4 @@
-package org.kelog.todolist.web;
+package todolist.web;
 
 import org.springframework.stereotype.Component;
 

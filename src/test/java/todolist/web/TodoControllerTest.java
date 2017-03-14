@@ -1,10 +1,10 @@
-package org.kelog.todolist.web;
+package todolist.web;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.kelog.todolist.model.Todo;
-import org.kelog.todolist.service.TodoNotFoundException;
-import org.kelog.todolist.service.TodoService;
+import todolist.model.Todo;
+import todolist.service.TodoNotFoundException;
+import todolist.service.TodoService;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 

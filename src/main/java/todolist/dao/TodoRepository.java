@@ -1,6 +1,6 @@
-package org.kelog.todolist.dao;
+package todolist.dao;
 
-import org.kelog.todolist.model.Todo;
+import todolist.model.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

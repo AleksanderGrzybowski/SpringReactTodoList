@@ -1,4 +1,4 @@
-package org.kelog.todolist.model;
+package todolist.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

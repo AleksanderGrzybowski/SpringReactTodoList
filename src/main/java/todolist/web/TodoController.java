@@ -1,7 +1,7 @@
-package org.kelog.todolist.web;
+package todolist.web;
 
-import org.kelog.todolist.model.Todo;
-import org.kelog.todolist.service.TodoService;
+import todolist.model.Todo;
+import todolist.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

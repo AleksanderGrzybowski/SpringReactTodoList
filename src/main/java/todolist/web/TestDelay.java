@@ -1,4 +1,4 @@
-package org.kelog.todolist.web;
+package todolist.web;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -11,7 +11,7 @@ public class TestDelay {
     // edit for network lag simulation
     private static final int DELAY_MS = 200;
     
-    @Before("execution(* org.kelog..*Controller.*(..))")
+    @Before("execution(* todolist..*Controller.*(..))")
     public void delay() {
         try {
             Thread.sleep(DELAY_MS);
